@@ -1,0 +1,50 @@
+{
+  "name": "invisible-tech-followup",
+  "version": "1.0.0",
+  "description": "invisible tech project",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "jest --watch",
+    "test": "jest",
+    "commit": "git cz",
+    "lint": "tslint --project ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victor-enogwe/invisible-tech-followup.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/victor-enogwe/invisible-tech-followup/issues"
+  },
+  "homepage": "https://github.com/victor-enogwe/invisible-tech-followup#readme",
+  "jest": {
+    "preset": "ts-jest",
+    "coverageDirectory": "coverage",
+    "collectCoverage": true,
+    "moduleFileExtensions": [
+      "ts",
+      "js"
+    ],
+    "coverageReporters": [
+      "lcov"
+    ]
+  },
+  "devDependencies": {
+    "@types/jest": "24.0.13",
+    "@types/node": "12.0.4",
+    "commitizen": "3.1.1",
+    "css-loader": "2.1.1",
+    "cz-conventional-changelog": "2.1.0",
+    "jest": "24.8.0",
+    "ts-jest": "24.0.2",
+    "tslint": "5.16.0",
+    "tslint-config-standard": "8.0.1",
+    "tslint-etc": "1.5.3",
+    "typescript": "3.4.5"
+  },
+  "dependencies": {}
+}
