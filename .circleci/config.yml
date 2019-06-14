@@ -1,39 +1,52 @@
 version: 2.1
 defaults: &defaults
-    working_directory: ~/locale
-    docker:
-        - image: circleci/node
+  working_directory: ~/locale
+  docker:
+    - image: circleci/node
 restoreCache: &restoreCache
-    keys:
-        - locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
+  keys:
+    - locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
 jobs:
-    install:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                <<: *restoreCache
-            - run:
-                name: install npm packages
-                command: if (test ! -d ~/locale/node_modules); then npm ci; fi
-            - save_cache:
-                key: locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
-                paths:
-                    - ~/locale/node_modules
+  install:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+        <<: *restoreCache
+      - run:
+        name: install npm packages
+        command: if (test ! -d ~/locale/node_modules); then npm ci; fi
+      - save_cache:
+        key: locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
+        paths:
+          - ~/locale/node_modules
     test:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                <<: *restoreCache
-            - run:
-                name: run locale tests
-                command: npm run test
+      <<: *defaults
+      steps:
+        - checkout
+        - restore_cache:
+          <<: *restoreCache
+        - run:
+          name: run locale tests
+          command: npm run test
+    run:
+      <<: *defaults
+      steps:
+        - checkout
+        - restore_cache:
+          <<: *restoreCache
+        - run:
+          name: get weather data
+          command: npm start
 workflows:
     version: 2
     build-test-release-deploy:
-        jobs:
-            - install
-            - test:
-                requires:
-                    - install
+      jobs:
+        - install
+        - test:
+            requires:
+              - install
+        - run:
+            requires:
+              - install
+              - test
