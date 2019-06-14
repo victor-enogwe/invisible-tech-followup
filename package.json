@@ -7,7 +7,7 @@
     "build": "tsc",
     "postinstall": "npm run build",
     "dev": "export NODE_ENV=development  && jest --watch",
-    "start": "export NODE_ENV=development && node dist/index.js 100232 50001 73301",
+    "start": "node dist/index.js 100232 50001 73301",
     "test": "jest",
     "commit": "git cz",
     "lint": "tslint --project ."
@@ -28,7 +28,7 @@
     "coverageDirectory": "coverage",
     "collectCoverage": true,
     "roots": [
-      "Locale.ts",
+      "LocationWeather.ts",
       "tests/"
     ],
     "moduleFileExtensions": [
