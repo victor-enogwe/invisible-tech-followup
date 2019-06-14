@@ -12,30 +12,30 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        <<: *restoreCache
-      - run:
-        name: install npm packages
-        command: if (test ! -d ~/locale/node_modules); then npm ci; fi
-      - save_cache:
-        key: locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
-        paths:
-          - ~/locale/node_modules
-    test:
-      <<: *defaults
-      steps:
-        - checkout
-        - restore_cache:
           <<: *restoreCache
-        - run:
+      - run:
+          name: install npm packages
+          command: if (test ! -d ~/locale/node_modules); then npm ci; fi
+      - save_cache:
+          key: locale-node-cache-{{ checksum "npm-shrinkwrap.json" }}
+          paths:
+            - ~/locale/node_modules
+  test:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
+          <<: *restoreCache
+      - run:
           name: run locale tests
           command: npm run test
-    run:
-      <<: *defaults
-      steps:
-        - checkout
-        - restore_cache:
+  start:
+    <<: *defaults
+    steps:
+      - checkout
+      - restore_cache:
           <<: *restoreCache
-        - run:
+      - run:
           name: get weather data
           command: npm start
 workflows:
@@ -43,10 +43,8 @@ workflows:
     build-test-release-deploy:
       jobs:
         - install
-        - test:
-            requires:
-              - install
-        - run:
+        - test
+        - start:
             requires:
               - install
               - test

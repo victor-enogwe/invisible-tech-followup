@@ -5,8 +5,8 @@ describe('LocationWeather', () => {
   it('should recieve an api key', async () => {
     const key = LocationWeather.apiKey
     expect(LocationWeather).toHaveProperty('apiKey')
-    expect((LocationWeather.apiKey as string).length).toBeGreaterThanOrEqual(1)
-    LocationWeather.apiKey = undefined
+    expect((LocationWeather.apiKey).length).toBeGreaterThanOrEqual(1)
+    LocationWeather.apiKey = ''
     await expect(LocationWeather.getWeatherData([])).rejects.toThrowError('please supply a valid api key')
     LocationWeather.apiKey = key
   })

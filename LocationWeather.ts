@@ -48,7 +48,7 @@ export type Locations = Location[]
 export class LocationWeather {
   private static dataUrl = 'https://api.weatherbit.io/v2.0/current'
   private static _cache: Cache
-  public static apiKey = process.env.API_KEY
+  public static apiKey: string = process.env.API_KEY || ''
 
   /**
    * getWeatherData
