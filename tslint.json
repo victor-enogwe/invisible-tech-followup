@@ -47,7 +47,6 @@
 			"no-console": [
 					true,
 					"debug",
-					"info",
 					"log",
 					"time",
 					"timeEnd",
@@ -126,7 +125,14 @@
 			"no-unsafe-callback-scope": true,
 			"no-assign-mutated-array": true,
 
-			"completed-docs": true,
+			"completed-docs": [
+        true,
+        {
+          "enums": true,
+          "functions": {"visibilities": ["exported"]},
+          "methods": {"locations": "instance", "privacies": ["public", "protected"]}
+        }
+      ],
 			"prefer-for-of": true,
 			"only-arrow-functions": [true,  "allow-named-functions"],
 			"prefer-switch": true,
